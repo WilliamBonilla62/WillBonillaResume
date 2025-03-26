@@ -1,9 +1,9 @@
-name: Build LaTeX Resume
+name: Build XeLaTeX Resume
 
 on:
   push:
     branches:
-      - main  # or 'master', depending on your default branch
+      - main
   pull_request:
 
 jobs:
@@ -14,20 +14,21 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Setup TeX Live
-      uses: teatimeguest/setup-texlive-action@v2
-
-    - name: Install LaTeX packages
+    - name: Install XeLaTeX dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended
+        sudo apt-get install -y \
+          texlive-xetex \
+          texlive-fonts-recommended \
+          texlive-latex-extra \
+          fonts-freefont-otf
 
-    - name: Compile LaTeX document
+    - name: Compile with XeLaTeX
       run: |
-        pdflatex -interaction=nonstopmode -halt-on-error resume.tex
+        xelatex -interaction=nonstopmode -halt-on-error resume.tex
 
-    - name: Upload PDF as artifact
+    - name: Upload PDF
       uses: actions/upload-artifact@v4
       with:
         name: resume-pdf
-        path: resume_Will_Bonilla.pdf
+        path: willBonilla_Resume.pdf
