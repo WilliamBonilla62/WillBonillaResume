@@ -21,7 +21,8 @@ jobs:
           texlive-xetex \
           texlive-fonts-recommended \
           texlive-latex-extra \
-          fonts-freefont-otf
+          fonts-freefont-otf \
+          texlive-fonts-extra
 
     - name: Compile with XeLaTeX
       run: |
